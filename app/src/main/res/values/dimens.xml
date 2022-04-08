@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="CardCornerRadius">40dp</dimen>
+    <dimen name="CardMargin">10dp</dimen>
+    <dimen name="H1">40sp</dimen>
+    <dimen name="lostLoginOrPasswordMargin">20dp</dimen>
+    <dimen name="createAccMargin">10dp</dimen>
+    <dimen name="buttonLoginMargin">15dp</dimen>
+    <dimen name="loginFormMargin">15dp</dimen>
+</resources>
