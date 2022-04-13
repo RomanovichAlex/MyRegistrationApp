@@ -34,8 +34,6 @@ class RegistrationActivity : AppCompatActivity(), LoginContract.RepositoryView {
         binding.createAcc.setOnClickListener {
             Toast.makeText(this, R.string.create_account, Toast.LENGTH_SHORT).show()
         }
-
-
     }
 
     override fun setRegister() {
