@@ -9,4 +9,5 @@
     <dimen name="createAccMargin">10dp</dimen>
     <dimen name="buttonLoginMargin">15dp</dimen>
     <dimen name="loginFormMargin">15dp</dimen>
+    <dimen name="LoginScrollViewMargin">20dp</dimen>
 </resources>
