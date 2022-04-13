@@ -10,6 +10,9 @@
     <string name="password">Password</string>
     <string name="lost_your_login_or_password">Lost your login or password?</string>
     <string name="create_account">Create Account?</string>
+    <string name="InvalidUsernameOrPassword">Неверный логин или пароль!!!</string>
+    <string name="EnterTheData">Введите данные</string>
+    <string name="Succes">Success</string>
 
 
 </resources>

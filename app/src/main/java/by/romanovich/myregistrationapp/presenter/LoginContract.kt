@@ -4,6 +4,7 @@ class LoginContract {
 
     //все методы view
     interface RepositoryView {
+        fun setRegister()
         fun setSuccess()
         fun setError(error: String)
         fun showProgress()
