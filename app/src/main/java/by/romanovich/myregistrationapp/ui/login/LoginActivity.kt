@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import by.romanovich.myregistrationapp.R
 import by.romanovich.myregistrationapp.app
 import by.romanovich.myregistrationapp.databinding.ActivityLoginBinding
+import by.romanovich.myregistrationapp.ui.forgotPassword.PasswordRecoveryFragment
+import by.romanovich.myregistrationapp.ui.registration.RegistrationFragment
 
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {
@@ -31,9 +33,11 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         }
 
         binding.lostLoginOrPasswordTextView.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.login_container,PasswordRecoveryFragment()).addToBackStack("").commit()
             Toast.makeText(this, R.string.lost_your_login_or_password, Toast.LENGTH_SHORT).show()
         }
         binding.createAccTextView.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.login_container,RegistrationFragment()).addToBackStack("").commit()
             Toast.makeText(this, R.string.create_account, Toast.LENGTH_SHORT).show()
         }
     }

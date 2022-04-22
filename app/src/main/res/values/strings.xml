@@ -19,6 +19,7 @@
     <string name="e_mail">E-mail:</string>
     <string name="сreate_an_account">Сreate an account</string>
     <string name="send_instructions">send instructions</string>
+    <string name="sendInstructions">Инструкции отправлены</string>
 
 
 </resources>
