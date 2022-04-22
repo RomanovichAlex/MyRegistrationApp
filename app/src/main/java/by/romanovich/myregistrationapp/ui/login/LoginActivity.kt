@@ -6,19 +6,18 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import by.romanovich.myregistrationapp.R
-
 import by.romanovich.myregistrationapp.app
-import by.romanovich.myregistrationapp.databinding.ActivityRegistrationBinding
+import by.romanovich.myregistrationapp.databinding.ActivityLoginBinding
 
 
-class RegistrationActivity : AppCompatActivity(), LoginContract.View {
+class LoginActivity : AppCompatActivity(), LoginContract.View {
 
-    private lateinit var binding: ActivityRegistrationBinding
+    private lateinit var binding: ActivityLoginBinding
     private var presenter: LoginContract.Presenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRegistrationBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         presenter = restorePresenter()
