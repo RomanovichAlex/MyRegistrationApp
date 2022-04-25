@@ -7,7 +7,5 @@ data class UserProfile(
     val login: String,
     val email: String,
     //ссылка на аватарку
-    val avatarUrl: String,
-    //пинкод
-    val pin: Int
+    val avatarUrl: String
 )

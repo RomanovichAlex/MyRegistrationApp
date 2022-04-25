@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import by.romanovich.myregistrationapp.R
 import by.romanovich.myregistrationapp.app
 import by.romanovich.myregistrationapp.databinding.ActivityLoginBinding
+import by.romanovich.myregistrationapp.domain.entities.UserProfile
 import by.romanovich.myregistrationapp.ui.forgotPassword.PasswordRecoveryFragment
 import by.romanovich.myregistrationapp.ui.registration.RegistrationFragment
 
@@ -76,6 +77,10 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
 
     override fun setRegister() {
         Toast.makeText(this, getString(R.string.enter_the_data), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun loadAccountData(account: UserProfile) {
+        Toast.makeText(this, getString(R.string.succes), Toast.LENGTH_SHORT).show()
     }
 
     override fun setSuccess() {

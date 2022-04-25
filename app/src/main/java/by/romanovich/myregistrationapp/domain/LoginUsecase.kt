@@ -1,6 +1,8 @@
 package by.romanovich.myregistrationapp.domain
 
 import androidx.annotation.MainThread
+import by.romanovich.myregistrationapp.CallbackMain
+import by.romanovich.myregistrationapp.domain.entities.UserProfile
 
 //iterator
 //предметная облость, уже несет данные
@@ -10,6 +12,6 @@ interface LoginUsecase {
         login: String,
         password: String,
         //функция обратный вызов, после завершения метода, лямпда, замыкание Boolean который возращает Unit(ничего)
-        @MainThread callback: (Boolean) -> Unit
+        @MainThread callback: CallbackMain<UserProfile>
     )
 }

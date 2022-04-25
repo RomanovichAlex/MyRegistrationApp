@@ -1,13 +1,14 @@
 package by.romanovich.myregistrationapp.domain
 
 import androidx.annotation.WorkerThread
+import by.romanovich.myregistrationapp.domain.entities.UserProfile
 
 //предметная облость, достает данные
 interface LoginApi {
     //рабочий поток
     @WorkerThread
     //функция принимает login и password и возращает Boolean
-    fun login(login: String, password: String): Boolean
+    fun login(login: String, password: String): UserProfile
 
     @WorkerThread
     //функция передает login,email и password и возращает Boolean

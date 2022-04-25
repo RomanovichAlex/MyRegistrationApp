@@ -1,10 +1,11 @@
 package by.romanovich.myregistrationapp.data.loginApiImpl
 
 import by.romanovich.myregistrationapp.domain.LoginApi
+import by.romanovich.myregistrationapp.domain.entities.UserProfile
 
 class WebLoginApiImpl : LoginApi {
 
-    override fun login(login: String, password: String): Boolean {
+    override fun login(login: String, password: String): UserProfile {
 
         TODO("Not yet implemented")
     }

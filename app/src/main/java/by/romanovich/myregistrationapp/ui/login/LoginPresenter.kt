@@ -1,6 +1,8 @@
 package by.romanovich.myregistrationapp.ui.login
 
+import by.romanovich.myregistrationapp.CallbackMain
 import by.romanovich.myregistrationapp.domain.LoginUsecase
+import by.romanovich.myregistrationapp.domain.entities.UserProfile
 
 class LoginPresenter(
     private val loginUsecase: LoginUsecase
@@ -20,17 +22,22 @@ class LoginPresenter(
 
     override fun onLogin(login: String, password: String) {
         view?.showProgress()
-        //в котлине передаем лямбдами result из LoginUsecaseImpl
-        loginUsecase.login(login, password) { result ->
-            view?.hideProgress()
-            isSuccess = if (result) {
+        loginUsecase.login(login, password, object : CallbackMain<UserProfile> {
+
+            override fun onSuccess(result: UserProfile) {
+                view?.hideProgress()
+                view?.loadAccountData(result)
                 view?.setSuccess()
-                true
-            } else {
-                view?.setError("Неверный логин или пароль!!!")
-                false
+                isSuccess = true
             }
-        }
+
+            override fun onError(error: Exception) {
+
+                view?.hideProgress()
+                view?.setError("Неверный логин или пароль!!!")
+                isSuccess = false
+            }
+        })
     }
 
     override fun onCredentialsChanged() {

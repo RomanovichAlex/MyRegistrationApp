@@ -1,6 +1,7 @@
 package by.romanovich.myregistrationapp.ui.login
 
 import androidx.annotation.MainThread
+import by.romanovich.myregistrationapp.domain.entities.UserProfile
 
 //model
 //контракт для всех сущностей
@@ -22,7 +23,10 @@ class LoginContract {
 
         @MainThread
         fun setRegister()
+
         //fun getHandler(): Handler
+        @MainThread
+        fun loadAccountData(account: UserProfile)
     }
 
     //все методы пресентера
