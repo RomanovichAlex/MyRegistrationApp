@@ -39,16 +39,25 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
             }
 
             lostLoginOrPasswordTextView.setOnClickListener {
-                supportFragmentManager.beginTransaction().replace(R.id.login_container,PasswordRecoveryFragment()).addToBackStack("").commit()
-                Toast.makeText(this@LoginActivity, R.string.lost_your_login_or_password, Toast.LENGTH_SHORT).show()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.login_container, PasswordRecoveryFragment()).addToBackStack("")
+                    .commit()
+                Toast.makeText(
+                    this@LoginActivity,
+                    R.string.lost_your_login_or_password,
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             createAccTextView.setOnClickListener {
-                supportFragmentManager.beginTransaction().replace(R.id.login_container,RegistrationFragment()).addToBackStack("").commit()
-                Toast.makeText(this@LoginActivity, R.string.create_account, Toast.LENGTH_SHORT).show()
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.login_container, RegistrationFragment()).addToBackStack("")
+                    .commit()
+                Toast.makeText(this@LoginActivity, R.string.create_account, Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }
-        }
+    }
 
     //метод что бы достать презентор(объект) сохраненный в lastCustomNonConfigurationInstance если он LoginPresenter то мы его сохраняем
     private fun restorePresenter(): LoginPresenter {

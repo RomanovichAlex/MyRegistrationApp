@@ -11,7 +11,7 @@ class MockLoginApiImpl : LoginApi {
         return login == password
     }
 
-    override fun register(login: String, email: String,  password: String): Boolean {
+    override fun register(login: String, email: String, password: String): Boolean {
         Thread.sleep(2_000)
         //только логин т.к. на одной почте может быть несколько аккаунтов
         return login.isNotEmpty()

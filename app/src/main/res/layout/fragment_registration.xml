@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.registration.RegistrationFragment">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,18 +61,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/email_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:drawableStart="@drawable/email_ic"
-                    android:hint="@string/e_mail"
-                    android:background="@android:color/transparent"
-                    app:passwordToggleEnabled="true"
-                    android:inputType="textEmailAddress" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/email_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:drawableStart="@drawable/email_ic"
+                        android:hint="@string/e_mail"
+                        android:background="@android:color/transparent"
+                        app:passwordToggleEnabled="true"
+                        android:inputType="textEmailAddress" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
                 <com.google.android.material.textfield.TextInputLayout
