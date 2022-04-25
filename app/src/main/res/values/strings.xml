@@ -20,6 +20,8 @@
     <string name="сreate_an_account">Сreate an account</string>
     <string name="send_instructions">send instructions</string>
     <string name="sendInstructions">Инструкции отправлены</string>
+    <string name="password_recovery">Password Recovery</string>
+    <string name="email">Введите Ваш E-mail используемый для входа. Мы вышлем письмо с инструкцией.</string>
 
 
 </resources>
