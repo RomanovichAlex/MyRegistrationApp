@@ -26,10 +26,4 @@ class RegistrationFragment : ViewBindingFragment<FragmentRegistrationBinding>(Fr
             Toast.makeText(requireContext(), "createAccount", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = RegistrationFragment()
-    }
 }

@@ -9,7 +9,7 @@ class WebLoginApiImpl : LoginApi {
         TODO("Not yet implemented")
     }
 
-    override fun register(login: String, password: String, email: String): Boolean {
+    override fun register(login: String, email: String, password: String): Boolean {
         TODO("Not yet implemented")
     }
 

@@ -25,22 +25,30 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         presenter = restorePresenter()
         presenter?.onAttach(this)
 
-        binding.loginButton.setOnClickListener {
-            presenter?.onLogin(
-                binding.loginEditText.text.toString(),
-                binding.passwordEditText.text.toString()
-            )
-        }
+        initClick()
 
-        binding.lostLoginOrPasswordTextView.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.login_container,PasswordRecoveryFragment()).addToBackStack("").commit()
-            Toast.makeText(this, R.string.lost_your_login_or_password, Toast.LENGTH_SHORT).show()
-        }
-        binding.createAccTextView.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.login_container,RegistrationFragment()).addToBackStack("").commit()
-            Toast.makeText(this, R.string.create_account, Toast.LENGTH_SHORT).show()
-        }
     }
+
+    private fun initClick() {
+        with(binding) {
+            loginButton.setOnClickListener {
+                presenter?.onLogin(
+                    binding.loginEditText.text.toString(),
+                    binding.passwordEditText.text.toString()
+                )
+            }
+
+            lostLoginOrPasswordTextView.setOnClickListener {
+                supportFragmentManager.beginTransaction().replace(R.id.login_container,PasswordRecoveryFragment()).addToBackStack("").commit()
+                Toast.makeText(this@LoginActivity, R.string.lost_your_login_or_password, Toast.LENGTH_SHORT).show()
+            }
+            createAccTextView.setOnClickListener {
+                supportFragmentManager.beginTransaction().replace(R.id.login_container,RegistrationFragment()).addToBackStack("").commit()
+                Toast.makeText(this@LoginActivity, R.string.create_account, Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        }
 
     //метод что бы достать презентор(объект) сохраненный в lastCustomNonConfigurationInstance если он LoginPresenter то мы его сохраняем
     private fun restorePresenter(): LoginPresenter {

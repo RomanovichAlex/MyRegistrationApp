@@ -1,11 +1,18 @@
-package by.romanovich.myregistrationapp.data.userRepoImpl
+package by.romanovich.myregistrationapp.data.userRepositoryImpl
 
 import by.romanovich.myregistrationapp.domain.UserRepo
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
 
-class RetrifitUserRepoImpl : UserRepo {
+//принимает два параметра
+class CombineUserRepoImpl(
+    //локальный репозиторий
+    private val localRepo: UserRepo,
+    //удаленный репозиторий
+    private val remoteRepo: UserRepo
+) : UserRepo {
     override fun addUser(user: UserProfile) {
-        TODO("Not yet implemented")
+        localRepo.addUser(user)
+        remoteRepo.addUser(user)
     }
 
     override fun getAllUsers(): List<UserProfile> {
@@ -24,4 +31,3 @@ class RetrifitUserRepoImpl : UserRepo {
         TODO("Not yet implemented")
     }
 }
-
