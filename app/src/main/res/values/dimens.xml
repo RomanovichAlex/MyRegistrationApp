@@ -5,6 +5,7 @@
     <dimen name="CardCornerRadius">40dp</dimen>
     <dimen name="CardMargin">10dp</dimen>
     <dimen name="H1">40sp</dimen>
+    <dimen name="H2">20sp</dimen>
     <dimen name="lostLoginOrPasswordMargin">20dp</dimen>
     <dimen name="createAccMargin">10dp</dimen>
     <dimen name="buttonLoginMargin">15dp</dimen>
