@@ -7,11 +7,11 @@ import by.romanovich.myregistrationapp.domain.entities.UserProfile
 interface LoginApi {
     //рабочий поток
     @WorkerThread
-    //функция принимает login и password и возращает Boolean
+    //функция принимает login и password и возращает UserProfile
     fun login(login: String, password: String): UserProfile
 
     @WorkerThread
-    //функция передает login,email и password и возращает Boolean
+    //функция передает login,email и password и возращает UserProfile
     fun registration(login: String, email: String, password: String): UserProfile
 
     @WorkerThread

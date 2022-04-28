@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.registration.RegistrationFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -17,9 +16,9 @@
             android:id="@+id/card_view_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/CardCornerRadius"
-            app:cardBackgroundColor="@color/lightBlue"
             android:layout_margin="@dimen/CardMargin"
+            app:cardBackgroundColor="@color/lightBlue"
+            app:cardCornerRadius="@dimen/CardCornerRadius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,8 +52,8 @@
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:drawableStart="@drawable/user_ic"
-                        android:inputType="textPersonName"
-                        android:hint="@string/login" />
+                        android:hint="@string/login"
+                        android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -66,11 +65,11 @@
                         android:id="@+id/email_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
                         android:drawableStart="@drawable/email_ic"
                         android:hint="@string/e_mail"
-                        android:background="@android:color/transparent"
-                        app:passwordToggleEnabled="true"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textEmailAddress"
+                        app:passwordToggleEnabled="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -84,11 +83,11 @@
                         android:id="@+id/password_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
                         android:drawableStart="@drawable/lock_ic"
                         android:hint="@string/password"
-                        android:background="@android:color/transparent"
-                        app:passwordToggleEnabled="true"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        app:passwordToggleEnabled="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,8 +95,8 @@
                     android:id="@+id/create_account_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/buttonLoginMargin"
                     android:layout_gravity="center"
+                    android:layout_margin="@dimen/buttonLoginMargin"
                     android:text="@string/сreate_an_account" />
 
 

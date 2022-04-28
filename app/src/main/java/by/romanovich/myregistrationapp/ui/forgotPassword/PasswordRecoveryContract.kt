@@ -1,19 +1,11 @@
 package by.romanovich.myregistrationapp.ui.forgotPassword
 
-import by.romanovich.myregistrationapp.domain.entities.UserProfile
+import by.romanovich.myregistrationapp.Publisher
+import by.romanovich.myregistrationapp.ui.AppState
 
 class PasswordRecoveryContract {
-    interface PasswordRecoveryViewInterface {
-        fun showProgress()
-        fun hideProgress()
-        fun setSuccess()
-        fun showError(error: Exception)
-        fun forgetPasswordData(account: UserProfile)
-    }
-
-    interface PasswordRecoveryPresenterInterface  {
-        fun onAttachView(view: PasswordRecoveryViewInterface)
+    interface ViewModel {
+        fun getLiveData(): Publisher<AppState>
         fun findAccount(email: String)
-        fun onDetach()
     }
 }

@@ -6,18 +6,18 @@ import by.romanovich.myregistrationapp.domain.LoginApi
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
 
 //тестовый
-class MockLoginApiImpl(private val localDataSource: AccountsDAO) : LoginApi {
+class LoginApiImpl(private val localDataSource: AccountsDAO) : LoginApi {
 
     private fun getAllAccounts(): List<Account> = localDataSource.getAllAccount()
 
-    private fun checkData(login: String?, password: String?,email: String?) {
+    private fun checkData(login: String?, password: String?, email: String?) {
         if (login != null && login.isEmpty()) {
             throw Exception()
         }
         if (password != null && password.isEmpty()) {
             throw Exception()
         }
-        if (email != null && email.isEmpty()){
+        if (email != null && email.isEmpty()) {
             throw Exception()
         }
     }
@@ -25,7 +25,7 @@ class MockLoginApiImpl(private val localDataSource: AccountsDAO) : LoginApi {
     override fun login(login: String, password: String): UserProfile {
         //будет валить приложение если не из главного потока вызвана
         Thread.sleep(2_000)
-        checkData(login, password,null)
+        checkData(login, password, null)
         val accountsList = getAllAccounts()
         for (account in accountsList) {
             if (account.login == login && account.password == password) {
@@ -39,17 +39,17 @@ class MockLoginApiImpl(private val localDataSource: AccountsDAO) : LoginApi {
         checkData(login, password, null)
         val accountsList = getAllAccounts()
         for (account in accountsList) {
-            if(account.login == login && account.email == email) {
+            if (account.login == login && account.email == email) {
                 throw Exception()
             }
         }
-        val newAccount = Account(id=null, login = login, password = password, email = email)
+        val newAccount = Account(id = null, login = login, password = password, email = email)
         localDataSource.registration(newAccount)
         return convertAccountToUserProfile(newAccount)
     }
 
 
-    override fun passwordRecovery(email: String): UserProfile{
+    override fun passwordRecovery(email: String): UserProfile {
         checkData(null, null, email)
         val accountsList = getAllAccounts()
         for (account in accountsList) {
@@ -60,11 +60,11 @@ class MockLoginApiImpl(private val localDataSource: AccountsDAO) : LoginApi {
         throw Exception()
     }
 
-    fun convertAccountToUserProfile(account: Account): UserProfile {
+    private fun convertAccountToUserProfile(account: Account): UserProfile {
         return UserProfile(
             id = account.id,
             login = account.login,
-            email = account.email,
+            email = account.email
         )
     }
 }
