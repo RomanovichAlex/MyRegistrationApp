@@ -9,7 +9,7 @@ class MockUserRepoImpl : UserRepo {
     }
 
     override fun getAllUsers(): List<UserProfile> {
-        return listOf(UserProfile("id", "login", "email", "png"))
+        return listOf(UserProfile(0, "login", "email"))
     }
 
     override fun changeUser(id: String, user: UserProfile) {

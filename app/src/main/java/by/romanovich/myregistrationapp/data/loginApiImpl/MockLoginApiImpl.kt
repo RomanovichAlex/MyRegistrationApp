@@ -10,11 +10,14 @@ class MockLoginApiImpl(private val localDataSource: AccountsDAO) : LoginApi {
 
     private fun getAllAccounts(): List<Account> = localDataSource.getAllAccount()
 
-    private fun checkData(login: String?, password: String?) {
+    private fun checkData(login: String?, password: String?,email: String?) {
         if (login != null && login.isEmpty()) {
             throw Exception()
         }
         if (password != null && password.isEmpty()) {
+            throw Exception()
+        }
+        if (email != null && email.isEmpty()){
             throw Exception()
         }
     }
@@ -22,7 +25,7 @@ class MockLoginApiImpl(private val localDataSource: AccountsDAO) : LoginApi {
     override fun login(login: String, password: String): UserProfile {
         //будет валить приложение если не из главного потока вызвана
         Thread.sleep(2_000)
-        checkData(login, password)
+        checkData(login, password,null)
         val accountsList = getAllAccounts()
         for (account in accountsList) {
             if (account.login == login && account.password == password) {
@@ -32,20 +35,29 @@ class MockLoginApiImpl(private val localDataSource: AccountsDAO) : LoginApi {
         throw Exception()
     }
 
-    override fun register(login: String, email: String, password: String): Boolean {
-        Thread.sleep(2_000)
-        //только логин т.к. на одной почте может быть несколько аккаунтов
-        return login.isNotEmpty()
+    override fun registration(login: String, email: String, password: String): UserProfile {
+        checkData(login, password, null)
+        val accountsList = getAllAccounts()
+        for (account in accountsList) {
+            if(account.login == login && account.email == email) {
+                throw Exception()
+            }
+        }
+        val newAccount = Account(id=null, login = login, password = password, email = email)
+        localDataSource.registration(newAccount)
+        return convertAccountToUserProfile(newAccount)
     }
 
-    override fun logout(): Boolean {
-        Thread.sleep(2_000)
-        return true
-    }
 
-    override fun forgotPassword(email: String): Boolean {
-        Thread.sleep(1_000)
-        return false
+    override fun passwordRecovery(email: String): UserProfile{
+        checkData(null, null, email)
+        val accountsList = getAllAccounts()
+        for (account in accountsList) {
+            if (account.email == email) {
+                return convertAccountToUserProfile(account)
+            }
+        }
+        throw Exception()
     }
 
     fun convertAccountToUserProfile(account: Account): UserProfile {
@@ -53,7 +65,6 @@ class MockLoginApiImpl(private val localDataSource: AccountsDAO) : LoginApi {
             id = account.id,
             login = account.login,
             email = account.email,
-            avatarUrl = account.avatarUrl
         )
     }
 }

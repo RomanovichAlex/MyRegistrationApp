@@ -1,7 +1,7 @@
 package by.romanovich.myregistrationapp.ui.login
 
 import by.romanovich.myregistrationapp.CallbackMain
-import by.romanovich.myregistrationapp.domain.LoginUsecase
+import by.romanovich.myregistrationapp.domain.usecase.LoginUsecase
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
 
 class LoginPresenter(

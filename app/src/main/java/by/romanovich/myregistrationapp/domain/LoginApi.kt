@@ -12,15 +12,11 @@ interface LoginApi {
 
     @WorkerThread
     //функция передает login,email и password и возращает Boolean
-    fun register(login: String, email: String, password: String): Boolean
-
-    @WorkerThread
-    //функция сервер в курсе что клиент ушел
-    fun logout(): Boolean
+    fun registration(login: String, email: String, password: String): UserProfile
 
     @WorkerThread
     //функция забыли пароль
-    fun forgotPassword(email: String): Boolean
+    fun passwordRecovery(email: String): UserProfile
 
 
 }

@@ -4,7 +4,7 @@ import android.os.Handler
 import androidx.annotation.MainThread
 import by.romanovich.myregistrationapp.CallbackMain
 import by.romanovich.myregistrationapp.domain.LoginApi
-import by.romanovich.myregistrationapp.domain.LoginUsecase
+import by.romanovich.myregistrationapp.domain.usecase.LoginUsecase
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
 
 //промежуточный элемент между апи и презентором

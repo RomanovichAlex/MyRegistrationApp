@@ -6,10 +6,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class Account(
     @PrimaryKey
-    val id: String,
+    val id: Int?,
     val login: String,
     val password: String,
-    val email: String,
-    //ссылка на аватарку
-    val avatarUrl: String
+    val email: String
 )

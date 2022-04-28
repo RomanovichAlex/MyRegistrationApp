@@ -1,4 +1,4 @@
-package by.romanovich.myregistrationapp.domain
+package by.romanovich.myregistrationapp.domain.usecase
 
 import androidx.annotation.MainThread
 import by.romanovich.myregistrationapp.CallbackMain
