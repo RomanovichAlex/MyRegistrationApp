@@ -2,43 +2,53 @@ package by.romanovich.myregistrationapp.ui.login
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.View
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import by.romanovich.myregistrationapp.R
 import by.romanovich.myregistrationapp.app
 import by.romanovich.myregistrationapp.databinding.ActivityLoginBinding
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
 import by.romanovich.myregistrationapp.ui.forgotPassword.PasswordRecoveryFragment
 import by.romanovich.myregistrationapp.ui.registration.RegistrationFragment
+import by.romanovich.myregistrationapp.ui.state.AppState
+import by.romanovich.myregistrationapp.ui.state.ViewState
 
 
-class LoginActivity : AppCompatActivity(), LoginContract.View {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private var presenter: LoginContract.Presenter? = null
+
+    private val viewSaveState = "ViewSaveState"
+    private var viewState: ViewState = ViewState.INIT
+    private var viewModel: LoginContract.ViewModel? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        presenter = restorePresenter()
-        presenter?.onAttach(this)
+        viewModel = restoreViewModel()
 
-        initClick()
+        initClickBySubscription()
 
+        restoreStateUi()
     }
 
-    private fun initClick() {
+    private fun initClickBySubscription() {
+        viewModel?.getLiveData()?.subscribe(Handler(Looper.getMainLooper())) { state ->
+            renderData(state)
+        }
         with(binding) {
             loginButton.setOnClickListener {
-                presenter?.onLogin(
+                viewModel?.onLogin(
                     binding.loginEditText.text.toString(),
                     binding.passwordEditText.text.toString()
                 )
             }
-
             lostLoginOrPasswordTextView.setOnClickListener {
                 supportFragmentManager.beginTransaction()
                     .replace(R.id.login_container, PasswordRecoveryFragment()).addToBackStack("")
@@ -56,50 +66,62 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
                 Toast.makeText(this@LoginActivity, R.string.create_account, Toast.LENGTH_SHORT)
                     .show()
             }
-
         }
     }
 
-    //метод что бы достать презентор(объект) сохраненный в lastCustomNonConfigurationInstance если он LoginPresenter то мы его сохраняем
-    private fun restorePresenter(): LoginPresenter {
-        val presenter = lastCustomNonConfigurationInstance as? LoginPresenter
-        /*для запоминания при повороте, перенесли в класс апп
-        val api = (application as App).api*/
-        //возращаем presenter, но если он ноль то создаем новый презентер
-        return presenter ?: LoginPresenter(app.loginUsecase)
+    private fun renderData(result: AppState) {
+        when (result) {
+            is AppState.Loading -> {
+                binding.loginCardViewContainer.isVisible = true
+            }
+            is AppState.Success -> {
+                loadAccountData(result.userProfile)
+            }
+            is AppState.Error -> {
+                showError(result.error)
+            }
+        }
+    }
+
+    private fun restoreViewModel(): LoginViewModel {
+        val viewModel = lastCustomNonConfigurationInstance as? LoginViewModel
+
+        return viewModel ?: LoginViewModel(app.loginUsecase)
     }
 
     //метод что бы положить объект
     override fun onRetainCustomNonConfigurationInstance(): Any? {
-        return presenter
+        return viewModel
     }
 
 
-    override fun setRegister() {
-        Toast.makeText(this, getString(R.string.enter_the_data), Toast.LENGTH_SHORT).show()
+    private fun showError(error: Exception) {
+        binding.loginCardViewContainer.setBackgroundColor(Color.RED)
+        Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
     }
 
-    override fun loadAccountData(account: UserProfile) {
+
+    private fun loadAccountData(account: UserProfile) {
+        viewState = ViewState.IS_SUCCESS
+        binding.loginCardViewContainer.setBackgroundColor(Color.GREEN)
         Toast.makeText(this, getString(R.string.succes), Toast.LENGTH_SHORT).show()
     }
 
-    override fun setSuccess() {
-        binding.cardViewContainer.setBackgroundColor(Color.GREEN)
-        Toast.makeText(this, getString(R.string.succes), Toast.LENGTH_SHORT).show()
-        hideProgress()
+    private fun restoreStateUi() {
+        when (viewState) {
+            ViewState.INIT -> {}
+            ViewState.ERROR -> {
+                binding.loginCardViewContainer.setBackgroundColor(Color.RED)
+            }
+            ViewState.IS_SUCCESS -> {
+                binding.loginCardViewContainer.setBackgroundColor(Color.GREEN)
+            }
+        }
     }
 
-    override fun setError(error: String) {
-        showProgress()
-        binding.cardViewContainer.setBackgroundColor(Color.RED)
-        Toast.makeText(this, " " + "$error", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun showProgress() {
-        binding.cardViewContainer.visibility = View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        binding.cardViewContainer.visibility = View.VISIBLE
+    //отписываемся
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel?.getLiveData()?.unsubscribeAll()
     }
 }

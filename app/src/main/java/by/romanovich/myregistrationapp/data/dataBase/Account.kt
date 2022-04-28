@@ -1,15 +1,17 @@
 package by.romanovich.myregistrationapp.data.dataBase
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
 data class Account(
-    @PrimaryKey
-    val id: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int?,
+    @ColumnInfo(name = "LOGIN")
     val login: String,
+    @ColumnInfo(name = "PASSWORD")
     val password: String,
-    val email: String,
-    //ссылка на аватарку
-    val avatarUrl: String
+    @ColumnInfo(name = "EMAIL")
+    val email: String
 )

@@ -3,9 +3,7 @@ package by.romanovich.myregistrationapp.domain.entities
 //когда в одном приложении может быть много пользователей
 
 data class UserProfile(
-    val id: String,
+    val id: Int?,
     val login: String,
-    val email: String,
-    //ссылка на аватарку
-    val avatarUrl: String
+    val email: String
 )

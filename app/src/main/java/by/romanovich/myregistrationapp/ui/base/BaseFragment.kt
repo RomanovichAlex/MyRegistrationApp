@@ -13,7 +13,6 @@ abstract class BaseFragment<T : ViewBinding>(
     ) -> T
 ) : Fragment() {
     private var _binding: T? = null
-
     protected val binding: T
         get() = _binding !!
 

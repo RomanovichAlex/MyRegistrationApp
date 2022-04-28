@@ -13,12 +13,12 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_container"
+            android:id="@+id/login_card_view_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/CardCornerRadius"
-            app:cardBackgroundColor="@color/lightBlue"
             android:layout_margin="@dimen/CardMargin"
+            app:cardBackgroundColor="@color/lightBlue"
+            app:cardCornerRadius="@dimen/CardCornerRadius"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,8 +52,8 @@
                         android:layout_height="wrap_content"
                         android:background="@android:color/transparent"
                         android:drawableStart="@drawable/user_ic"
-                        android:inputType="textPersonName"
-                        android:hint="@string/login" />
+                        android:hint="@string/login"
+                        android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -67,18 +67,18 @@
                         android:id="@+id/password_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
                         android:drawableStart="@drawable/lock_ic"
                         android:hint="@string/password"
-                        android:background="@android:color/transparent"
-                        app:passwordToggleEnabled="true"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        app:passwordToggleEnabled="true" />
 
                     <TextView
                         android:id="@+id/lost_login_or_password_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/lostLoginOrPasswordMargin"
                         android:layout_gravity="right"
+                        android:layout_marginEnd="@dimen/lostLoginOrPasswordMargin"
                         android:text="@string/lost_your_login_or_password" />
 
 
@@ -88,8 +88,8 @@
                     android:id="@+id/login_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/buttonLoginMargin"
                     android:layout_gravity="center"
+                    android:layout_margin="@dimen/buttonLoginMargin"
                     android:text="@string/login" />
 
                 <TextView

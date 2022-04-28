@@ -2,31 +2,41 @@ package by.romanovich.myregistrationapp
 
 import android.app.Application
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import androidx.room.Room
 import by.romanovich.myregistrationapp.data.LoginUsecaseImpl
 import by.romanovich.myregistrationapp.data.dataBase.AccountsDAO
 import by.romanovich.myregistrationapp.data.dataBase.AccountsDB
-import by.romanovich.myregistrationapp.data.loginApiImpl.MockLoginApiImpl
+import by.romanovich.myregistrationapp.data.loginApiImpl.LoginApiImpl
+import by.romanovich.myregistrationapp.data.usecaseImpl.PasswordRecoveryUsecaseImpl
+import by.romanovich.myregistrationapp.data.usecaseImpl.RegistrationUsecaseImpl
 import by.romanovich.myregistrationapp.domain.LoginApi
-import by.romanovich.myregistrationapp.domain.LoginUsecase
+import by.romanovich.myregistrationapp.domain.usecase.LoginUsecase
+import by.romanovich.myregistrationapp.domain.usecase.PasswordRecoveryUsecase
+import by.romanovich.myregistrationapp.domain.usecase.RegistrationUsecase
 
 
 //создаём апи на все приложение единожды
 class App : Application() {
-    //никто кроме активити не знает о существовании loginApi
-    private val loginApi: LoginApi by lazy { MockLoginApiImpl(getAccountDao()) }
+    private val loginApi: LoginApi by lazy { LoginApiImpl(getAccountDao()) }
+
     val loginUsecase: LoginUsecase by lazy {
         LoginUsecaseImpl(
-            app.loginApi,
-            Handler(Looper.getMainLooper())
+            app.loginApi
         )
+    }
+    val passwordRecoveryUsecase: PasswordRecoveryUsecase by lazy {
+        PasswordRecoveryUsecaseImpl(app.loginApi)
+    }
+
+    val registrationUsecase: RegistrationUsecase by lazy {
+        RegistrationUsecaseImpl(app.loginApi)
     }
 
     override fun onCreate() {
         super.onCreate()
-        db = Room.databaseBuilder(this, AccountsDB::class.java, "Accounts.db").build()
+        db = Room.databaseBuilder(this, AccountsDB::class.java, "Accounts.db")
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     companion object {

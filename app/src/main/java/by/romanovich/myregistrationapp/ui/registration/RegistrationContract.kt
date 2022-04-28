@@ -1,14 +1,11 @@
-package by.romanovich.myregistrationapp.ui.login
+package by.romanovich.myregistrationapp.ui.registration
 
 import by.romanovich.myregistrationapp.Publisher
 import by.romanovich.myregistrationapp.ui.state.AppState
 
-//model
-//контракт для всех сущностей
-class LoginContract {
-
+class RegistrationContract {
     interface ViewModel {
         fun getLiveData(): Publisher<AppState>
-        fun onLogin(login: String, password: String)
+        fun onRegistration(login: String, password: String, email: String)
     }
 }
