@@ -11,8 +11,8 @@ import by.romanovich.myregistrationapp.R
 import by.romanovich.myregistrationapp.app
 import by.romanovich.myregistrationapp.databinding.FragmentRegistrationBinding
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
-import by.romanovich.myregistrationapp.ui.state.AppState
 import by.romanovich.myregistrationapp.ui.base.BaseFragment
+import by.romanovich.myregistrationapp.ui.state.AppState
 import by.romanovich.myregistrationapp.ui.state.ViewState
 
 
@@ -77,6 +77,7 @@ class RegistrationFragment :
         binding.registrationCardViewContainer.setBackgroundColor(Color.GREEN)
         Toast.makeText(requireContext(), getString(R.string.acc_create), Toast.LENGTH_SHORT).show()
     }
+
     private fun restoreStateUi() {
         when (viewState) {
             ViewState.INIT -> {}
@@ -94,6 +95,7 @@ class RegistrationFragment :
         binding.registrationCardViewContainer.setBackgroundColor(Color.RED)
         Toast.makeText(requireContext(), "Ошибка", Toast.LENGTH_SHORT).show()
     }
+
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(viewSaveState, viewState.value)

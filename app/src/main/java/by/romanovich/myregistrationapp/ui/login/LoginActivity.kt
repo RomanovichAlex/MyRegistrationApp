@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -12,9 +11,9 @@ import by.romanovich.myregistrationapp.R
 import by.romanovich.myregistrationapp.app
 import by.romanovich.myregistrationapp.databinding.ActivityLoginBinding
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
-import by.romanovich.myregistrationapp.ui.state.AppState
 import by.romanovich.myregistrationapp.ui.forgotPassword.PasswordRecoveryFragment
 import by.romanovich.myregistrationapp.ui.registration.RegistrationFragment
+import by.romanovich.myregistrationapp.ui.state.AppState
 import by.romanovich.myregistrationapp.ui.state.ViewState
 
 
@@ -119,6 +118,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
+
     //отписываемся
     override fun onDestroy() {
         super.onDestroy()

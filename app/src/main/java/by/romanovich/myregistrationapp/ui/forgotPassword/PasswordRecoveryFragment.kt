@@ -11,8 +11,8 @@ import by.romanovich.myregistrationapp.R
 import by.romanovich.myregistrationapp.app
 import by.romanovich.myregistrationapp.databinding.FragmentPasswordRecoveryBinding
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
-import by.romanovich.myregistrationapp.ui.state.AppState
 import by.romanovich.myregistrationapp.ui.base.BaseFragment
+import by.romanovich.myregistrationapp.ui.state.AppState
 import by.romanovich.myregistrationapp.ui.state.ViewState
 
 

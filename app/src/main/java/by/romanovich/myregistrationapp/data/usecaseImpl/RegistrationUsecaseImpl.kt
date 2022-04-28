@@ -17,7 +17,7 @@ class RegistrationUsecaseImpl(
         Thread {
             try {
                 //берем апи и результат
-                val result = api.registration(login, password, email)
+                val result = api.registration(login, email, password)
                 //передаем результат, запускаем в главном потоке
                 callback.onSuccess(result)
             } catch (exc: Exception) {
