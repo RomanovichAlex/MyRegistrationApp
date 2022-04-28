@@ -22,6 +22,8 @@
     <string name="sendInstructions">Инструкции отправлены</string>
     <string name="password_recovery">Password Recovery</string>
     <string name="email">Введите Ваш E-mail используемый для входа. Мы вышлем письмо с инструкцией.</string>
+    <string name="acc_create">Аккаунт создан</string>
+    <string name="error">Error</string>
 
 
 </resources>

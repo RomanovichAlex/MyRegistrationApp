@@ -1,7 +1,7 @@
 package by.romanovich.myregistrationapp.ui.registration
 
 import by.romanovich.myregistrationapp.Publisher
-import by.romanovich.myregistrationapp.ui.AppState
+import by.romanovich.myregistrationapp.ui.state.AppState
 
 class RegistrationContract {
     interface ViewModel {

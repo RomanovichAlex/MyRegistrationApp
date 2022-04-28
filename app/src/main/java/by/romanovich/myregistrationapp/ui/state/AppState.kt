@@ -1,4 +1,4 @@
-package by.romanovich.myregistrationapp.ui
+package by.romanovich.myregistrationapp.ui.state
 
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
 

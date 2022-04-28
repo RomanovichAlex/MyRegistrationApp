@@ -11,13 +11,15 @@ import by.romanovich.myregistrationapp.R
 import by.romanovich.myregistrationapp.app
 import by.romanovich.myregistrationapp.databinding.FragmentPasswordRecoveryBinding
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
-import by.romanovich.myregistrationapp.ui.AppState
+import by.romanovich.myregistrationapp.ui.state.AppState
 import by.romanovich.myregistrationapp.ui.base.BaseFragment
+import by.romanovich.myregistrationapp.ui.state.ViewState
 
 
 class PasswordRecoveryFragment :
     BaseFragment<FragmentPasswordRecoveryBinding>(FragmentPasswordRecoveryBinding::inflate) {
-
+    private val viewSaveState = "ViewSaveState"
+    private var viewState: ViewState = ViewState.INIT
     private var viewModel: PasswordRecoveryContract.ViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +30,12 @@ class PasswordRecoveryFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initClickBySubscription()
+        savedInstanceState?.let {
+            viewState = ViewState.fromInt(
+                it.getInt(viewSaveState, 0)
+            )
+        }
+        restoreStateUi()
     }
 
     private fun initClickBySubscription() {
@@ -36,21 +44,15 @@ class PasswordRecoveryFragment :
         }
         binding.sendInstructionsAccountButton.setOnClickListener {
             viewModel?.findAccount(
-                binding.sendInstructionsAccountButton.text.toString()
+                binding.emailEditText.text.toString()
             )
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.sendInstructions),
-                Toast.LENGTH_SHORT
-            ).show()
         }
     }
 
     private fun renderData(result: AppState) {
-        binding.cardViewContainer.isVisible = false
         when (result) {
             is AppState.Loading -> {
-                binding.cardViewContainer.isVisible = true
+                binding.passwordRecoveryCardViewContainer.isVisible = true
             }
             is AppState.Success -> {
                 forgetPasswordData(result.userProfile)
@@ -63,14 +65,37 @@ class PasswordRecoveryFragment :
 
 
     private fun showError(error: Exception) {
-        binding.cardViewContainer.setBackgroundColor(Color.RED)
+        viewState = ViewState.ERROR
+        binding.passwordRecoveryCardViewContainer.setBackgroundColor(Color.RED)
         Toast.makeText(requireContext(), "Ошибка", Toast.LENGTH_SHORT).show()
     }
 
     private fun forgetPasswordData(account: UserProfile) {
-        Toast.makeText(requireContext(), getString(R.string.succes), Toast.LENGTH_SHORT).show()
+        viewState = ViewState.IS_SUCCESS
+        binding.passwordRecoveryCardViewContainer.setBackgroundColor(Color.GREEN)
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.sendInstructions),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
+    private fun restoreStateUi() {
+        when (viewState) {
+            ViewState.INIT -> {}
+            ViewState.ERROR -> {
+                binding.passwordRecoveryCardViewContainer.setBackgroundColor(Color.RED)
+            }
+            ViewState.IS_SUCCESS -> {
+                binding.passwordRecoveryCardViewContainer.setBackgroundColor(Color.GREEN)
+            }
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(viewSaveState, viewState.value)
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

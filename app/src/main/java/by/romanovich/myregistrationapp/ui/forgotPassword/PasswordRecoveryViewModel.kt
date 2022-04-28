@@ -4,7 +4,7 @@ import by.romanovich.myregistrationapp.CallbackMain
 import by.romanovich.myregistrationapp.Publisher
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
 import by.romanovich.myregistrationapp.domain.usecase.PasswordRecoveryUsecase
-import by.romanovich.myregistrationapp.ui.AppState
+import by.romanovich.myregistrationapp.ui.state.AppState
 
 class PasswordRecoveryViewModel(
     private val passwordRecoveryUseCase: PasswordRecoveryUsecase

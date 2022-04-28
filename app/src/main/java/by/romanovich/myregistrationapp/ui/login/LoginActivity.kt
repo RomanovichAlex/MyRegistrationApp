@@ -12,15 +12,18 @@ import by.romanovich.myregistrationapp.R
 import by.romanovich.myregistrationapp.app
 import by.romanovich.myregistrationapp.databinding.ActivityLoginBinding
 import by.romanovich.myregistrationapp.domain.entities.UserProfile
-import by.romanovich.myregistrationapp.ui.AppState
+import by.romanovich.myregistrationapp.ui.state.AppState
 import by.romanovich.myregistrationapp.ui.forgotPassword.PasswordRecoveryFragment
 import by.romanovich.myregistrationapp.ui.registration.RegistrationFragment
+import by.romanovich.myregistrationapp.ui.state.ViewState
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
+    private val viewSaveState = "ViewSaveState"
+    private var viewState: ViewState = ViewState.INIT
     private var viewModel: LoginContract.ViewModel? = null
 
 
@@ -33,6 +36,7 @@ class LoginActivity : AppCompatActivity() {
 
         initClickBySubscription()
 
+        restoreStateUi()
     }
 
     private fun initClickBySubscription() {
@@ -67,10 +71,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun renderData(result: AppState) {
-        binding.cardViewContainer.isVisible = false
         when (result) {
             is AppState.Loading -> {
-                binding.cardViewContainer.isVisible = true
+                binding.loginCardViewContainer.isVisible = true
             }
             is AppState.Success -> {
                 loadAccountData(result.userProfile)
@@ -79,13 +82,6 @@ class LoginActivity : AppCompatActivity() {
                 showError(result.error)
             }
         }
-    }
-
-
-    //отписываемся
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel?.getLiveData()?.unsubscribeAll()
     }
 
     private fun restoreViewModel(): LoginViewModel {
@@ -101,32 +97,31 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun showError(error: Exception) {
-        binding.cardViewContainer.setBackgroundColor(Color.RED)
-        Toast.makeText(this, " " + "$error", Toast.LENGTH_SHORT).show()
+        binding.loginCardViewContainer.setBackgroundColor(Color.RED)
+        Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
     }
 
 
     private fun loadAccountData(account: UserProfile) {
+        viewState = ViewState.IS_SUCCESS
+        binding.loginCardViewContainer.setBackgroundColor(Color.GREEN)
         Toast.makeText(this, getString(R.string.succes), Toast.LENGTH_SHORT).show()
     }
 
-    fun setSuccess() {
-        binding.cardViewContainer.setBackgroundColor(Color.GREEN)
-        Toast.makeText(this, getString(R.string.succes), Toast.LENGTH_SHORT).show()
-        hideProgress()
+    private fun restoreStateUi() {
+        when (viewState) {
+            ViewState.INIT -> {}
+            ViewState.ERROR -> {
+                binding.loginCardViewContainer.setBackgroundColor(Color.RED)
+            }
+            ViewState.IS_SUCCESS -> {
+                binding.loginCardViewContainer.setBackgroundColor(Color.GREEN)
+            }
+        }
     }
-
-    fun setError(error: String) {
-        showProgress()
-        binding.cardViewContainer.setBackgroundColor(Color.RED)
-        Toast.makeText(this, " " + "$error", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showProgress() {
-        binding.cardViewContainer.visibility = View.VISIBLE
-    }
-
-    private fun hideProgress() {
-        binding.cardViewContainer.visibility = View.VISIBLE
+    //отписываемся
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel?.getLiveData()?.unsubscribeAll()
     }
 }

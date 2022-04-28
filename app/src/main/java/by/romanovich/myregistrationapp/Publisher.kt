@@ -13,7 +13,6 @@ private data class Subscriber<T>(
     }
 }
 
-
 class Publisher<T> {
 
     private val subscribers: MutableSet<Subscriber<T>> = mutableSetOf()
